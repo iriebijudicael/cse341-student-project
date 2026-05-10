@@ -4,13 +4,13 @@ dotenv.config();
 
 let _db;
 
-export const initDb = async () => {
+const initDb = async () => {
   if (_db) {
     console.log('Db is already initialized!');
     return _db;
   }
   try {
-    const client = await MongoClient.connect(process.env.MONGODB_URI);
+    const client = await MongoClient.connect(process.env.MONGODB_URL);
     _db = client;
     return _db;
   } catch (err) {
@@ -18,9 +18,11 @@ export const initDb = async () => {
   }
 };
 
-export const getDb = () => {
+ const getDb = () => {
   if (!_db) {
     throw Error('Db not initialized');
   }
   return _db;
 };
+
+export { getDb, initDb };
