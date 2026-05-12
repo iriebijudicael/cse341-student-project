@@ -2,6 +2,7 @@
   "name": "cse341-student-project",
   "version": "1.0.0",
   "description": "Starter project for CSE 341",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,7 +16,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/iriebijudicael/cse341-student-project/issues"
   },
