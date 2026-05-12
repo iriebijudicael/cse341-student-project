@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+
+    <main>
+        <h2>Contacts</h2>
+        <ul>
+            <% contacts.forEach(contact => { %>
+                <li>
+                    <%= contact.firstName %> <%= contact.lastName %> - <%= contact.email %>
+                    <a href="/contacts/<%= contact._id %>">View</a>
+                </li>
+            <% }); %>
+        </ul>
+    </main>
+
+    <%- include('partials/footer') %>
+</body>
+</html>
