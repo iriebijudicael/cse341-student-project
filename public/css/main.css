@@ -15,6 +15,13 @@ body {
 
 body {
     nav {
+        background-color: #6de4bf;
+        padding: 15px 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+    nav {
         ul {
             list-style-type: none;
             padding: 0;
@@ -31,7 +38,7 @@ body {
             font-weight: bold;
 
             &:hover {
-                color: #0066cc;
+                color: #3c73aa;
             }
         }
     }
@@ -40,7 +47,7 @@ body {
 /* Main Container */
 main {
     max-width: 600px;
-    margin: 40px auto;
+    margin: 30px auto;
     background: #fff;
     padding: 30px;
     border-radius: 8px;
@@ -73,7 +80,7 @@ label {
 
 input {
     padding: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
@@ -101,6 +108,60 @@ button {
 
 button:hover {
     background-color: #2980b9;
+}
+
+/* Second page for viewing contacts */
+/* Table Styles */
+/* main .view-contacts {
+    text-align: center;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+} */
+.contacts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
+
+.contacts-table th, .contacts-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.contacts-table th {
+    background-color: #6de4bf;
+    color: #2c3e50;
+}
+
+.contacts-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.view-btn {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.add-btn {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
 }
 
 /* Simple Responsive Design */

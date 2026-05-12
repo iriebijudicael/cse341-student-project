@@ -17,6 +17,11 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+// 1. Serve static files first
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));

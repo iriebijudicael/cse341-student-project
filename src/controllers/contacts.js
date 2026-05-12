@@ -53,11 +53,11 @@ const updateContact = async (req, res) => {
     const userId = new ObjectId(req.params.id);
     const contact = {
       
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
-      username: req.body.username,
-      name: req.body.name,
-      ipAddress: req.body.ipAddress,
-      birthday: req.body.birthday
+      favoriteColor: req.body.favoriteColor,
+      ipAddress: req.body.ipAddress
     };
     const result = await getDb().db().collection('contacts').replaceOne({ _id: userId }, contact);
     res.status(204).json(result);

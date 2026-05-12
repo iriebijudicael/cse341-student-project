@@ -1,26 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
-    <%- include('partials/header') %>
+
+<%- include('partials/header') %>
 
     <main>
-        <h2>Contacts</h2>
-        <ul>
-            <% contacts.forEach(contact => { %>
-                <li>
-                    <%= contact.firstName %> <%= contact.lastName %> - <%= contact.email %>
-                    <a href="/contacts/<%= contact._id %>">View</a>
-                </li>
-            <% }); %>
-        </ul>
+        <div class="view-contacts">
+            <h2>Your Contacts</h2>
+            <p>A list of all users currently stored in the database.</p>
+
+            <table class="contacts-table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Favorite Color</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% contacts.forEach(function(contact) { %>
+                        <tr>
+                            <td><%= contact.firstName %></td>
+                            <td><%= contact.lastName %></td>
+                            <td><%= contact.email %></td>
+                            <td><%= contact.favoriteColor %></td>
+                            <td>
+                                <a href="/contacts/<%= contact._id %>" class="view-btn">View Details</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table> 
+        
+            <div class="actions">
+                <a href="/" class="add-btn">Add New Contact</a>
+            </div>
+        </div>
     </main>
 
-    <%- include('partials/footer') %>
-</body>
-</html>
+<%- include('partials/footer') %>
