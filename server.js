@@ -11,7 +11,7 @@ import dns from 'dns';
 // Change DNS
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5500;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const __filename = fileURLToPath(import.meta.url);
