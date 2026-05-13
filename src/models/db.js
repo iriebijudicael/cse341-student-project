@@ -1,5 +1,6 @@
-import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
+import { MongoClient } from 'mongodb';
+
 dotenv.config();
 
 let _db;
@@ -18,11 +19,14 @@ const initDb = async () => {
   }
 };
 
- const getDb = () => {
+const getDb = () => {
   if (!_db) {
     throw Error('Db not initialized');
   }
   return _db;
 };
 
-export { getDb, initDb };
+export {
+  initDb,
+  getDb,
+};
