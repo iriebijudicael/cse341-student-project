@@ -9,7 +9,7 @@ import dns from 'dns';
 dotenv.config();
 
 // Change DNS
-dns.setServers(["1.1.1.1", "1.0.0.1"]);
+dns.setServers(["0.0.0.0", "1.0.0.1"]);
 const app = express();
 const PORT = process.env.PORT || 5500;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -33,16 +33,11 @@ app.use(express.urlencoded({ extended: true }));
 // Use the imported router
 app.use(router);
 
-const startServer = async () => {
+app.listen(PORT, async () => {
   try {
     await initDb();
-    app.listen(PORT, () => {
-      console.log(`Server is running at http://localhost:${PORT}`);
-    });
+    console.log(`Server is running at http://localhost:${PORT}`);
   } catch (error) {
     console.error('Error connecting to the database:', error);
-    process.exit(1);
   }
-};
-
-startServer();
+});
