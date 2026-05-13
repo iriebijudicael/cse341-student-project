@@ -10,7 +10,7 @@ const initDb = async () => {
     return _db;
   }
   try {
-    const client = await MongoClient.connect(process.env.MONGODB_URI);
+    const client = await MongoClient.connect(process.env.MONGODB_URL);
     _db = client;
     return _db;
   } catch (err) {
