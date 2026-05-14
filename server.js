@@ -1,8 +1,8 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { initDb } from './src/models/db.js';
-import router from './src/controllers/routes.js';
+import { initDb } from './models/db.js';
+import router from './controllers/routes.js';
 import dotenv from 'dotenv';
 import dns from 'dns';
 
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('json spaces', 2);
 
 app.use(express.json());
