@@ -1,7 +1,7 @@
 
 import express from 'express';
 // Import your controller functions
-// import { showHomePage } from './index.js';
+import { showHomePage } from './index.js';
 import swaggerRoutes from './swagger.js';
 import { getAll, getSingle, createContact, updateContact, deleteContact, renderContacts } from './contacts.js';
 
