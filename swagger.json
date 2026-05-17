@@ -5,7 +5,7 @@
     "description": "CSE341 Contacts Project API Documentation for Week 02 CRUD Operations",
     "version": "1.0.0"
   },
-  "host": "https://cse341-student-project.onrender.com",
+  "host": "cse341-student-project.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
