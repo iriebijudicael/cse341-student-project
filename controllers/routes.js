@@ -7,12 +7,12 @@ import { getAll, getSingle, createContact, updateContact, deleteContact, renderC
 
 const router = express.Router();
 
-// router.get('/', showHomePage);
-// router.get('/', getAll); 
-// router.get('/contacts/:id', getSingle);
-// router.post('/contacts', createContact);
-// router.put('/contacts/:id', updateContact);
-// router.delete('/contacts/:id', deleteContact);
+router.get('/', showHomePage);
+router.get('/', getAll); 
+router.get('/contacts/:id', getSingle);
+router.post('/contacts', createContact);
+router.put('/contacts/:id', updateContact);
+router.delete('/contacts/:id', deleteContact);
 // // router.get('/contacts-list', renderContacts);
 
 
@@ -20,10 +20,10 @@ const router = express.Router();
 router.use('/', swaggerRoutes);
 
 
-router.get('/', getAll);
-router.get('/:id', getSingle);
-router.post('/', createContact);
-router.put('/:id', updateContact);
-router.delete('/:id', deleteContact);
+// router.get('/', getAll);
+// router.get('/:id', getSingle);
+// router.post('/', createContact);
+// router.put('/:id', updateContact);
+// router.delete('/:id', deleteContact);
 
 export default router;
