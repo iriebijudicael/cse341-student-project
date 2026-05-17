@@ -1,0 +1,45 @@
+### REST client routes for the contacts API
+
+@baseUrl = http://localhost:5500
+
+### Home page
+GET http://localhost:5500
+Accept: text/html
+
+### Get all contacts
+GET http://localhost:5500/contacts
+Accept: application/json
+
+### Get one contact by id
+GET http://localhost:5500/contacts/6a09bbdd5966928964381cf9
+Accept: application/json
+
+### Create a new contact
+POST http://localhost:5500/contacts HTTP/1.1
+Content-Type: application/json
+
+{
+  
+  "email": "Kevine225@gmail.com",
+  "username": "kouke",
+  "name": "Kevine",
+  "ipAddress": "192.168.1.1",
+}
+
+### Update a contact by id
+PUT http://localhost:5500/contacts/6a09bbdd5966928964381cf9 HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "Kevine225@gmail.com",
+  "username": "kouke",
+  "name": "Kevine",
+  "ipAddress": "192.168.1.1",
+}
+
+### Delete a contact by id
+DELETE http://localhost:5500/contacts/6a09bbdd5966928964381cf9
+
+### Render HTML contacts list
+GET http://localhost:5500/contacts-list
+Accept: text/html

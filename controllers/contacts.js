@@ -1,7 +1,9 @@
+// import { name } from 'ejs';
 import { getDb } from '../models/db.js';
 import { ObjectId } from 'mongodb';
 
 const getAll = async (req, res) => {
+  //swagger.tags(['Contacts']);
   try {
     const result = await getDb().db().collection('contacts').find();
     const lists = await result.toArray();
@@ -13,6 +15,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+  //swagger.tags(['Contacts']);
   try {
     const userId = new ObjectId(req.params.id);
     const result = await getDb().db().collection('contacts').find({ _id: userId });
@@ -25,54 +28,50 @@ const getSingle = async (req, res) => {
 };
 
 const createContact = async (req, res) => {
-  try {
-    const contact = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      favoriteColor: req.body.favoriteColor,
-      ipAddress: req.body.ipAddress
-    };
-    const result = await getDb().db().collection('contacts').insertOne(contact);
-    if (req.headers.accept && req.headers.accept.includes('text/html')) {
-      res.redirect('/contacts-list');
-    } else {
-      res.status(201).json(result);
-    }
-  } catch (error) {
-    if (req.headers.accept && req.headers.accept.includes('text/html')) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(500).json({ error: error.message });
-    }
+  //swagger.tags(['Contacts']);
+  const user = {
+    email: req.body.email,
+    userName: req.body.userName,
+    name: req.body.name,
+    ipaddress: req.body.ipaddress,
+  };
+  const response = await mongodb.getDatabase().db().collection('contacts').insertOne(contact);
+  if (response.acknowledged) {
+    res.status(201).json(response.insertedId);
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while creating the user.');
   }
 };
 
 const updateContact = async (req, res) => {
-  try {
-    const userId = new ObjectId(req.params.id);
-    const contact = {
-      
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      favoriteColor: req.body.favoriteColor,
-      ipAddress: req.body.ipAddress
-    };
-    const result = await getDb().db().collection('contacts').replaceOne({ _id: userId }, contact);
-    res.status(204).json(result);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  //swagger.tags(['Contacts']);
+  const userId = new ObjectId(req.params.id);
+  
+  // FIX: Match the exact schema properties used in your project
+  const user = {
+    email: req.body.email,
+    userName: req.body.userName,
+    name: req.body.name,
+    ipaddress: req.body.ipaddress,
+  };
+
+  const response = await mongodb.getDatabase().db().collection('users').replaceOne({ _id: userId }, contacts);
+  
+  if (response.modifiedCount > 0) {
+    res.status(204).send(); // 204 No Content is correct for a successful PUT
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the user.');
   }
 };
 
 const deleteContact = async (req, res) => {
-  try {
-    const userId = new ObjectId(req.params.id);
-    const result = await getDb().db().collection('contacts').deleteOne({ _id: userId });
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  //swagger.tags(['Contacts']);
+  const userId = new ObjectId(req.params.id);
+  const response = await mongodb.getDatabase().db().collection('contacts').deleteOne({ _id: userId });
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while deleting the user.');
   }
 };
 
@@ -86,4 +85,9 @@ const renderContacts = async (req, res) => {
   }
 };
 
-export { getAll, getSingle, createContact, updateContact, deleteContact, renderContacts };
+export { getAll, 
+  getSingle, 
+  createContact, 
+  updateContact, 
+  deleteContact, 
+  renderContacts };
