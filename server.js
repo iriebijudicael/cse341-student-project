@@ -1,14 +1,16 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
 import path from 'path';
 import { initDb } from './models/db.js';
-import * as mongodb from './models/db.js';
-import router from './controllers/routes.js';
-import dotenv from 'dotenv';
 import dns from 'dns';
 
-dotenv.config();
+import * as mongodb from './models/db.js';
+import router from './controllers/routes.js';
+
 
 // Change DNS
 dns.setServers(["0.0.0.0", "1.0.0.1"]);
