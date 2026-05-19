@@ -56,7 +56,7 @@ const updateContact = async (req, res) => {
     ipAddress: req.body.ipAddress
   };
 
-  const response = await mongodb.getDb().db().collection('users').replaceOne({ _id: userId }, contact);
+  const response = await mongodb.getDb().db().collection('users').replaceOne({ _id: userId });
   
   if (response.modifiedCount > 0) {
     res.status(204).send(); // 204 No Content is correct for a successful PUT
