@@ -1,28 +1,39 @@
+
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
-let _db;
 
-const initDb = async () => {
-  if (_db) {
+
+let db;
+
+const initDb = (callback) => {
+  if (db) {
     console.log('Db is already initialized!');
-    return _db;
+    return callback(null, db);
   }
-  try {
-    const client = await MongoClient.connect(process.env.MONGODB_URL);
-    _db = client;
-    return _db;
-  } catch (err) {
-    throw err;
-  }
+  
+  // Connects using your environment variable string safely
+  MongoClient.connect(process.env.MONGODB_URL)
+    .then((client) => {
+      db = client;
+      callback(null, db);
+    })
+    .catch((err) => {
+      callback(err);
+    });
 };
 
- const getDb = () => {
-  if (!_db) {
-    throw Error('Db not initialized');
+
+const getDb = () => {
+  if (!db) {
+    throw Error('Database not initialized');
   }
-  return _db;
+  return db;
 };
 
-export { getDb, initDb };
+// Clean ES Module named exports to match your server.js and controllers
+export {
+  initDb,
+  getDb
+};

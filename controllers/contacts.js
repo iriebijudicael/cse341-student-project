@@ -1,6 +1,7 @@
 // import { name } from 'ejs';
 import { getDb } from '../models/db.js';
 import { ObjectId } from 'mongodb';
+import * as mongodb from '../models/db.js';
 
 const getAll = async (req, res) => {
   //swagger.tags(['Contacts']);
@@ -29,13 +30,13 @@ const getSingle = async (req, res) => {
 
 const createContact = async (req, res) => {
   //swagger.tags(['Contacts']);
-  const user = {
+  const contact = {
     email: req.body.email,
     userName: req.body.userName,
     name: req.body.name,
-    ipaddress: req.body.ipaddress,
+    ipAddress: req.body.ipAddress
   };
-  const response = await mongodb.getDatabase().db().collection('contacts').insertOne(contact);
+  const response = await mongodb.getDb().db().collection('contacts').insertOne(contact);
   if (response.acknowledged) {
     res.status(201).json(response.insertedId);
   } else {
@@ -48,14 +49,14 @@ const updateContact = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   
   // FIX: Match the exact schema properties used in your project
-  const user = {
+  const contact = {
     email: req.body.email,
     userName: req.body.userName,
     name: req.body.name,
-    ipaddress: req.body.ipaddress,
+    ipAddress: req.body.ipAddress
   };
 
-  const response = await mongodb.getDatabase().db().collection('users').replaceOne({ _id: userId }, contacts);
+  const response = await mongodb.getDb().db().collection('users').replaceOne({ _id: userId }, contact);
   
   if (response.modifiedCount > 0) {
     res.status(204).send(); // 204 No Content is correct for a successful PUT
@@ -67,7 +68,7 @@ const updateContact = async (req, res) => {
 const deleteContact = async (req, res) => {
   //swagger.tags(['Contacts']);
   const userId = new ObjectId(req.params.id);
-  const response = await mongodb.getDatabase().db().collection('contacts').deleteOne({ _id: userId });
+  const response = await mongodb.getDb().db().collection('contacts').deleteOne({ _id: userId });
   if (response.deletedCount > 0) {
     res.status(204).send();
   } else {

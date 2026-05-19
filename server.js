@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
 import path from 'path';
 import { initDb } from './models/db.js';
+import * as mongodb from './models/db.js';
 import router from './controllers/routes.js';
 import dotenv from 'dotenv';
 import dns from 'dns';
@@ -15,18 +16,18 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 
-// 1. Serve static files first
-app.use(express.static(path.join(__dirname, 'public')));
+// // 1. Serve static files first
+// app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Set the view engine to ejs
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-// app.set('json spaces', 2);
+// // Set the view engine to ejs
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+// // app.set('json spaces', 2);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -49,11 +50,12 @@ app.use((req, res, next) => {
 // 3. Swagger Interactive Documentation Route
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.listen(PORT, async () => { 
-  try {
-    await initDb();
-    console.log(`Server is running at http://localhost:${PORT}`);
-  } catch (error) {
-    console.error('Error connecting to the database:', error);
+mongodb.initDb((err) => {
+  if (err) {
+    console.error('MongoDB Connection Interrupted:', err);
+  } else {
+    app.listen(PORT, () => {
+      console.log(` Server is running at http://localhost:${PORT}`);
+    });
   }
 });

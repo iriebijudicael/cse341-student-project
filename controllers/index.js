@@ -1,7 +1,9 @@
-const showHomePage = async (req, res) => {
-    const title = 'Home';
+// routes/index.js
+import express from 'express';
+const router = express.Router();
 
-    res.render('index', { title });
-};
+router.get("/", (req, res) => {
+    res.send('Hello World'); 
+});
 
-export { showHomePage };
+export default router;
