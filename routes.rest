@@ -11,7 +11,7 @@ GET http://localhost:3001/
 Accept: application/json
 
 ### Get one contact by id
-GET http://localhost:3001/6a09bbdd5966928964381cf9
+GET http://localhost:3001/6a0c5b1f912782e50361d37b
 Accept: application/json
 
 ### Create a new contact
@@ -20,9 +20,9 @@ Content-Type: application/json
 
  {
     "email": "iriebyupathway.edu",
-    "userName": "Emma Irie",
-    "name": "Judicael",
-    "ipAddress": "192.168.1.18"
+    "userName": "Bi",
+    "name": "Oluwafemi",
+    "ipAddress": "192.168.1.50"
   }
 
 ### Update a contact by id
@@ -31,13 +31,13 @@ Content-Type: application/json
 
  {
     "email": "iriebyupathway.edu",
-    "userName": "Emma Irie",
-    "name": "Judicael",
-    "ipAddress": "192.168.1.18"
+    "userName": "Bi",
+    "name": "Oluwafemi",
+    "ipAddress": "192.168.1.50"
   }
 
 ### Delete a contact by id
-DELETE http://localhost:3001/6a0c51d4babf7cdba558bfc9
+DELETE http://localhost:3001/6a0c8a65cd8d26eb65660098
 
 ### Render HTML contacts list
 GET http://localhost:3001/

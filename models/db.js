@@ -1,7 +1,6 @@
-
-import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
+import { MongoClient } from 'mongodb';
 
 
 
@@ -14,7 +13,7 @@ const initDb = (callback) => {
   }
   
   // Connects using your environment variable string safely
-  MongoClient.connect(process.env.MONGODB_URL)
+  MongoClient.connect(process.env.MONGODB_URL || process.env.MONGODB_URI)
     .then((client) => {
       db = client;
       callback(null, db);
@@ -37,3 +36,52 @@ export {
   initDb,
   getDb
 };
+
+
+
+
+
+
+
+
+// import dotenv from 'dotenv';
+// dotenv.config(); // Ensures variables are loaded instantly
+
+// import { MongoClient } from 'mongodb';
+
+// // 1. Grab your connection string securely
+// const mongoURI = process.env.MONGODB_URL || process.env.MONGODB_URI;
+
+// if (!mongoURI) {
+//   throw new Error('MongoDB connection string is missing from environment variables.');
+// }
+
+// // 2. Instantiate the client globally (matching image_f68bcc.png)
+// const client = new MongoClient(mongoURI);
+
+// let database;
+
+// // 3. Connect method matching the instructor's architecture
+// export function initDb(callback) {
+//   if (database) {
+//     console.log('Db is already initialized!');
+//     return callback(null, database);
+//   }
+
+//   client.connect()
+//     .then((connectedClient) => {
+//       database = connectedClient;
+//       callback(null, database);
+//     })
+//     .catch((err) => {
+//       callback(err);
+//     });
+// }
+
+// // 4. Clean retrieval helper function
+// export function getDatabase() {
+//   if (!database) {
+//     throw new Error('Database not initialized');
+//   }
+//   return database;
+// }

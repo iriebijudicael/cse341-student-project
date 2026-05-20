@@ -32,10 +32,11 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 // // app.set('json spaces', 2);
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 
 // Use the imported router
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
 
