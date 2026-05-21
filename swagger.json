@@ -36,7 +36,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": { "type": "string", "example": "john23@gmail.com" },
+                "email": { "type": "string", "example": "john225@gmail.com" },
                 "userName": { "type": "string", "example": "JohnUtah" },
                 "name": { "type": "string", "example": "John" },
                 "ipAddress": { "type": "string", "example": "192.168.1.10" }
@@ -72,6 +72,12 @@
         "responses": {
           "200": {
             "description": "Targeted document matching ID retrieved"
+          },
+          "400": {
+            "description": "Invalid ObjectId hex format supplied"
+          },
+          "404": {
+            "description": "No contact document matched the given identifier"
           }
         }
       },
@@ -95,7 +101,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": { "type": "string", "example": "johnkds@gmail.com" },
+                "email": { "type": "string", "example": "johnupdated@gmail.com" },
                 "userName": { "type": "string", "example": "JohnUtah" },
                 "name": { "type": "string", "example": "John" },
                 "ipAddress": { "type": "string", "example": "192.168.1.12" }
@@ -106,6 +112,9 @@
         "responses": {
           "204": {
             "description": "Document Modified Successfully. No content returned."
+          },
+          "400": {
+            "description": "Invalid ObjectId hex format supplied"
           },
           "500": {
             "description": "Modification Failure or Hex ID non-existent"
@@ -129,6 +138,9 @@
         "responses": {
           "204": {
             "description": "Document Purged Successfully. No payload returned."
+          },
+          "400": {
+            "description": "Invalid ObjectId hex format supplied"
           },
           "500": {
             "description": "Target ID missing or purge operation dropped"

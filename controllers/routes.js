@@ -22,7 +22,7 @@ router.delete('/:id', deleteContact);
 
 
 // 1. Hook up the Swagger Documentation routes (/api-docs)
-router.use('/', swaggerRoutes);
+router.use('/contacts', swaggerRoutes);
 
 
 
