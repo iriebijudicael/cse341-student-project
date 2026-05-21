@@ -5,7 +5,7 @@ import { createRequire } from 'module';
 
 // Resolve the path to your swagger-output.json file safely in ES Modules
 const require = createRequire(import.meta.url);
-const swaggerDocument = require('../../swagger.json');
+const swaggerDocument = require('../swagger.json');
 
 // Wire up the Swagger UI dashboard routes
 router.use('/api-docs', swaggerUi.serve);
