@@ -14,19 +14,6 @@
     "/": {
       "get": {
         "tags": [
-          "Home Page"
-        ],
-        "description": "Renders the dynamic MVC home dashboard layout.",
-        "responses": {
-          "200": {
-            "description": "HTML Render Successful"
-          }
-        }
-      }
-    },
-    "/contacts": {
-      "get": {
-        "tags": [
           "Contacts Resource"
         ],
         "description": "Retrieves all contact documents currently stored in the MongoDB cluster.",
@@ -49,9 +36,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": { "type": "string", "example":"john225@gmail.com"},
+                "email": { "type": "string", "example": "john23@gmail.com" },
                 "userName": { "type": "string", "example": "JohnUtah" },
-                "name": { "type": "string", "example":"John" },
+                "name": { "type": "string", "example": "John" },
                 "ipAddress": { "type": "string", "example": "192.168.1.10" }
               }
             }
@@ -67,7 +54,7 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/{id}": {
       "get": {
         "tags": [
           "Contacts Resource"
@@ -108,11 +95,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": { "type": "string", "example": "John" },
-                "lastName": { "type": "string", "example": "Utah" },
-                "email": { "type": "string", "example": "johnupdated@gmail.com" },
-                "favoriteColor": { "type": "string", "example": "blue" },
-                "birthday": { "type": "string", "example": "1995-04-23" }
+                "email": { "type": "string", "example": "johnkds@gmail.com" },
+                "userName": { "type": "string", "example": "JohnUtah" },
+                "name": { "type": "string", "example": "John" },
+                "ipAddress": { "type": "string", "example": "192.168.1.12" }
               }
             }
           }

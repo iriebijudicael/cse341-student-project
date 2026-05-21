@@ -9,7 +9,7 @@ const doc = {
   schemes: ['http', 'https']
 };
 
-const outputFile = './swagger-output.json';
+const outputFile = './swagger.json';
 // Point this to your main root routing file
 const endpointsFiles = ['./controllers/index.js']; 
 
