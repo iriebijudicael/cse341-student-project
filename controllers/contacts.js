@@ -31,10 +31,11 @@ const getSingle = async (req, res) => {
 const createContact = async (req, res) => {
   //swagger.tags(['Contacts']);
   const contact = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
-    userName: req.body.userName,
-    name: req.body.name,
-    ipAddress: req.body.ipAddress
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday
   };
   const response = await mongodb.getDb().db().collection('contacts').insertOne(contact);
   if (response.acknowledged) {
@@ -50,10 +51,11 @@ const updateContact = async (req, res) => {
   
   // FIX: Match the exact schema properties used in your project
   const contact = {
-    email: req.body.email,
-    userName: req.body.userName,
-    name: req.body.name,
-    ipAddress: req.body.ipAddress
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email, 
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday
   };
 
   const response = await mongodb.getDb().db().collection('contacts').replaceOne({ _id: userId }, contact);

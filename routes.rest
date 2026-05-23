@@ -31,9 +31,9 @@ Content-Type: application/json
 
  {
     "email": "emmabyupathway.edu",
-    "userName": "Bijudicael",
-    "name": "Emma Aho",
-    "ipAddress": "192.168.1.38"
+    "userName": "Kouke-kevine",
+    "name": "Kevine",
+    "ipAddress": "192.168.1.40"
   }
 
 ### Delete a contact by id
