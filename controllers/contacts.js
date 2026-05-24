@@ -17,6 +17,10 @@ const getAll = async (req, res) => {
 
 const getSingle = async (req, res) => {
   //swagger.tags(['Contacts']);
+  if(!ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: 'Must use a valid contact ID to find a contact.' });
+    return;
+  }
   try {
     const userId = new ObjectId(req.params.id);
     const result = await getDb().db().collection('contacts').find({ _id: userId });
@@ -47,8 +51,11 @@ const createContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   //swagger.tags(['Contacts']);
+  if(!ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: 'Must use a valid contact ID to update a contact.' });
+    return;
+  }
   const userId = new ObjectId(req.params.id);
-  
   // FIX: Match the exact schema properties used in your project
   const contact = {
     firstName: req.body.firstName,
@@ -69,6 +76,10 @@ const updateContact = async (req, res) => {
 
 const deleteContact = async (req, res) => {
   //swagger.tags(['Contacts']);
+  if(!ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: 'Must use a valid contact ID to delete a contact.' });
+    return;
+  }
   const userId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db().collection('contacts').deleteOne({ _id: userId });
   if (response.deletedCount > 0) {

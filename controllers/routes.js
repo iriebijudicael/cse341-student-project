@@ -4,6 +4,7 @@ import express from 'express';
 const router = express.Router();
 import swaggerRoutes from './swagger.js';
 import { getAll, getSingle, createContact, updateContact, deleteContact, renderContacts } from './contacts.js';
+import { saveContact } from '../middleware/validate.js';
 
 
 
@@ -16,8 +17,8 @@ import { getAll, getSingle, createContact, updateContact, deleteContact, renderC
 
 router.get('/', getAll);
 router.get('/:id', getSingle);
-router.post('/', createContact);
-router.put('/:id', updateContact);
+router.post('/', saveContact, createContact);
+router.put('/:id', saveContact, updateContact);
 router.delete('/:id', deleteContact);
 
 
