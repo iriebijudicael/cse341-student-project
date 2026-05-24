@@ -54,10 +54,10 @@ app.use((req, res, next) => {
 // 3. Swagger Interactive Documentation Route
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// process.on('uncaughtException', (err, origine) => {
-//   console.log(process.stderr.fd, `Caught Exception: ${err.message}\n` + `Exception origin: ${origin}`
-
-//   );});
+process.on('uncaughtException', (err, origine) => {
+  console.log(process.stderr.fd, `Caught Exception: ${err.message}\n` + `Exception origin: ${origin}`
+    
+  );});
 
 mongodb.initDb((err) => {
   if (err) {
