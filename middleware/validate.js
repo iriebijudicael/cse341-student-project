@@ -1,6 +1,6 @@
 // const Validator = require('validatorjs');
 // import { Validator } from 'validatorjs';
-import { validator } from '../controllers/validate.js';
+import  validator  from '../controllers/validate.js';
 
 /**
  * 1. Validation rules for the Contacts collection (7 Required Fields)
