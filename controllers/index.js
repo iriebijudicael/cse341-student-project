@@ -1,9 +1,9 @@
-// routes/index.js
-import express from 'express';
-const router = express.Router();
+// // routes/index.js
+// import express from 'express';
+// const router = express.Router();
 
-router.use("/", (req, res) => {
-    res.send('Hello World'); 
-});
+// router.use("/", (req, res) => {
+//     res.send('Hello World'); 
+// });
 
-export default router;
+// export default router;

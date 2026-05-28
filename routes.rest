@@ -39,7 +39,7 @@ Content-Type: application/json
   }
 
 ### Delete a contact by id
-DELETE http://localhost:3001/6a0bbd7a7478d8d738302ec8
+DELETE http://localhost:3001/6a135784aacd9532d547b394oiut
 
 ### Render HTML contacts list
 GET http://localhost:3001/
