@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb';
 /**
  * GET - Retrieves all instructor documents from the database collection.
  */
-export const getAllInstructors = async (req, res) => {
+ const getAllInstructors = async (req, res) => {
   try {
     const result = await getDb().db().collection('instructors').find().toArray();
     res.status(200).json(result);

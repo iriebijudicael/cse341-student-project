@@ -1,9 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { MongoClient } from 'mongodb';
+import dns from 'dns';
 
 
-
+ // Change DNS
+dns.setServers(["0.0.0.0", "1.0.0.1"]);
 let db;
 
 const initDb = (callback) => {
@@ -87,3 +89,33 @@ export {
 // }
 
 // export { initDb, getDb };
+
+
+
+
+// import dotenv from 'dotenv';
+// import { MongoClient } from 'mongodb';
+
+// dotenv.config();
+// let db;
+
+// export const initDb = (callback) => {
+//   if (db) return callback(null, db);
+  
+//   const connectionString = process.env.MONGODB_URL;
+//   if (!connectionString) {
+//     return callback(new Error('MongoDB connection string missing from environment variables.'));
+//   }
+
+//   MongoClient.connect(connectionString)
+//     .then((clientInstance) => {
+//       db = clientInstance;
+//       callback(null, db);
+//     })
+//     .catch((err) => callback(err));
+// };
+
+// export const getDb = () => {
+//   if (!db) throw new Error('Database connection pool not initialized.');
+//   return db;
+// };

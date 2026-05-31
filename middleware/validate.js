@@ -72,7 +72,7 @@ const validator = (body, rules, customMessages, callback) => {
   validation.fails(() => callback(validation.errors, false));
 };
 
-const saveCourse = (req, res, next) => {
+export const saveCourse = (req, res, next) => {
   const validationRule = {
     courseTitle: 'required|string|min:3',
     courseId: 'required|string',
@@ -95,7 +95,7 @@ const saveCourse = (req, res, next) => {
   });
 };
 
-const saveInstructor = (req, res, next) => {
+export const saveInstructor = (req, res, next) => {
   const validationRule = {
     firstName: 'required|string',
     lastName: 'required|string',
@@ -114,9 +114,4 @@ const saveInstructor = (req, res, next) => {
     }
     next();
   });
-};
-
-export default {
-  saveCourse,
-  saveInstructor
 };

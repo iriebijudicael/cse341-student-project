@@ -1,7 +1,7 @@
 import { getDb } from '../models/db.js'; // 💡 Notice the required .js extension
 import { ObjectId } from 'mongodb';
 
-export const getAllCourses = async (req, res) => {
+const getAllCourse = async (req, res) => {
   try {
     const result = await getDb().db().collection('courses').find().toArray();
     res.status(200).json(result);
@@ -10,7 +10,7 @@ export const getAllCourses = async (req, res) => {
   }
 };
 
-export const getCourseById = async (req, res) => {
+const getCourseById = async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "Invalid Course ID structure format." });
@@ -24,7 +24,7 @@ export const getCourseById = async (req, res) => {
   }
 };
 
-export const postCourse = async (req, res) => {
+const postCourse = async (req, res) => {
   try {
     const newCourse = {
       courseTitle: req.body.courseTitle,
@@ -42,7 +42,7 @@ export const postCourse = async (req, res) => {
   }
 };
 
-export const putCourse = async (req, res) => {
+const putCourse = async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "Invalid Course ID structure format." });
@@ -67,7 +67,7 @@ export const putCourse = async (req, res) => {
   }
 };
 
-export const deleteCourse = async (req, res) => {
+const deleteCourse = async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "Invalid Course ID structure format." });
@@ -80,3 +80,5 @@ export const deleteCourse = async (req, res) => {
     res.status(500).json({ message: err.message || "Database deletion execution failed." });
   }
 };
+
+export { putCourse, deleteCourse, getAllCourse, getCourseById, postCourse};
