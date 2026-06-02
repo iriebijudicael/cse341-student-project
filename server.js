@@ -99,7 +99,6 @@ process.on('uncaughtException', (err, origin) => {
 app
   .use(bodyParser.json())
   .use(express.urlencoded({ extended: true }))
-  .use("/", routesNexus)
   .use(session({
     secret: process.env.SESSION_SECRET || "secret",
     resave: false,
@@ -107,6 +106,7 @@ app
   }))
   .use(passport.initialize())
   .use(passport.session())
+  .use("/", routesNexus)
   .use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -131,6 +131,13 @@ passport.use(new GitHubStrategy({
     return done(null, profile);
   }
 ));
+
+// 1. Session parsing middleware configuration
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 passport.serializeUser((user, done) => {
   done(null, user);

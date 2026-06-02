@@ -1,48 +1,99 @@
-### REST client routes for the contacts API
+### =========================================================================
+### COLLEGE COURSE WORKSPACE MANAGER API - TESTING ENVIRONMENT TESTBED
+### =========================================================================
 
 @baseUrl = http://localhost:3001
 
-### Home page
-GET http://localhost:3001
-Accept: text/html
 
-### Get all contacts
-GET http://localhost:3001/
-Accept: application/json
+### SYSTEM SECURITY GATES & CORE ENDPOINTS
+### -------------------------------------------------------------------------
 
-### Get one contact by id
-GET http://localhost:3001/6a0dfe505b413bcf50ba2e3f
-Accept: application/json
+### GET OAuth Gateway Initializer Sequence
+GET http://localhost:3001/login HTTP/1.1
 
-### Create a new contact
+### GET GitHub Authentication Redirection Loop Callback Catchment
+GET http://localhost:3001/github/callback HTTP/1.1
+
+### GET Application Session Termination Endpoint
+GET http://localhost:3001/logout HTTP/1.1
+
+### GET Interactive REST API Specification UI Framework Dashboard
+GET http://localhost:3001/api-docs HTTP/1.1
+
+
+### COURSES MANAGEMENT RESOURCE COLLECTION
+### -------------------------------------------------------------------------
+
+### GET Retrieval Query Pipeline for All Academic Course Log Indexes
+GET http://localhost:3001/courses/ HTTP/1.1
+
+### GET Single Document Profile Query Look-up by Unique Hex ID String Mapping
+GET http://localhost:3001/courses/665a3dcf1c4a2b3e8c9d1001 HTTP/1.1
+
+### POST Persistence Engine Payload Construction to Append a New Course Document Record
 POST http://localhost:3001/courses/ HTTP/1.1
 Content-Type: application/json
 
- {
-    "firstName": "Nathan",
-    "lastName": "Barker",
-    "email": "barkern@byui.edu",
-    "department": "Computer Science & Engineering",
-    "officeLocation": "STC 312"
-  }
+{
+  "courseTitle": "Advanced Backend Development and API Architecture",
+  "courseId": "CSE 341",
+  "instructor": "Brother Nathan Barker",
+  "classMax": 45,
+  "currentEnrollment": 38,
+  "startDate": "2026-04-20",
+  "endDate": "2026-07-22"
+}
 
-### Update a contact by id
-PUT http://localhost:3001/courses/6a0c20bb9d57c87818cf1337 HTTP/1.1
+### PUT Key Field Mutation Request Updating an Existing Data Schema Record Map
+PUT http://localhost:3001/courses/665a3dcf1c4a2b3e8c9d1001 HTTP/1.1
 Content-Type: application/json
 
- {
-    "courseTitle": "Advanced Backend Development",
-    "courseId": "CSE 341",
-    "instructor": "Brother Nathan",
-    "classMax": 55,
-    "currentEnrollment": 48,
-    "startDate": "2026-04-20",
-    "endDate": "2026-07-24"
-  }
+{
+  "courseTitle": "Advanced Backend Development and API Architecture",
+  "courseId": "CSE 341",
+  "instructor": "Brother Nathan Barker",
+  "classMax": 50,
+  "currentEnrollment": 41,
+  "startDate": "2026-04-20",
+  "endDate": "2026-07-22"
+}
 
-### Delete a contact by id
-DELETE http://localhost:3001/6a135784aacd9532d547b394oiut
+### DELETE Drop Target Document Eviction Task Call
+DELETE http://localhost:3001/courses/665a3dcf1c4a2b3e8c9d1001 HTTP/1.1
 
-### Render HTML contacts list
-GET http://localhost:3001/
-Accept: text/html
+
+### 👨‍🏫 INSTRUCTORS MANAGEMENT RESOURCE COLLECTION
+### -------------------------------------------------------------------------
+
+### GET Retrieval Query Pipeline for All On-Campus Faculty Members
+GET http://localhost:3001/instructors/ HTTP/1.1
+
+### GET Single Instructor Document Profile Look-up Querying via Unique Hex Key String
+GET http://localhost:3001/instructors/665a3edf1c4a2b3e8c9d2002 HTTP/1.1
+
+### POST Persistence Engine Payload Construction to Append a New Instructor Profile Row
+POST http://localhost:3001/instructors/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Nathan",
+  "lastName": "Barker",
+  "email": "barkern@byui.edu",
+  "department": "Computer Science & Engineering",
+  "officeLocation": "STC 312"
+}
+
+### PUT Structural Key Field Overwrite Transaction Modifying Faculty Property Logs
+PUT http://localhost:3001/instructors/665a3edf1c4a2b3e8c9d2002 HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Nathan",
+  "lastName": "Barker",
+  "email": "barkern@byui.edu",
+  "department": "Computer Science & Engineering",
+  "officeLocation": "STC 316"
+}
+
+### DELETE Hard Removals Pipeline Signal Clearing Faculty Document Entries
+DELETE http://localhost:3001/instructors/665a3edf1c4a2b3e8c9d2002 HTTP/1.1
