@@ -82,7 +82,7 @@ import dotenv from 'dotenv';
 import { initDb } from './models/db.js';
 import passport from 'passport';
 import session from 'express-session';
-import routesNexus from './routes/index.js';
+// import routesNexus from './routes/index.js';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import cors from 'cors';
 import * as mongodb from './models/db.js';
@@ -106,7 +106,7 @@ app
   }))
   .use(passport.initialize())
   .use(passport.session())
-  .use("/", routesNexus)
+  .use(router)
   .use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(

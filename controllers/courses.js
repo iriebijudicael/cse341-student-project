@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 
 const getAllCourse = async (req, res) => {
   try {
-    const result = await getDb().db().collection('courses').find().toArray();
+    const result = await getDb().db().collection('mongodb1').find().toArray();
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: err.message || "An error occurred while retrieving courses." });
@@ -16,7 +16,7 @@ const getCourseById = async (req, res) => {
       return res.status(400).json({ message: "Invalid Course ID structure format." });
     }
     const courseId = new ObjectId(req.params.id);
-    const result = await getDb().db().collection('courses').findOne({ _id: courseId });
+    const result = await getDb().db().collection('mongodb1').findOne({ _id: courseId });
     if (!result) return res.status(404).json({ message: "Course document not found." });
     res.status(200).json(result);
   } catch (err) {
@@ -35,7 +35,7 @@ const postCourse = async (req, res) => {
       startDate: req.body.startDate,
       endDate: req.body.endDate
     };
-    const response = await getDb().db().collection('courses').insertOne(newCourse);
+    const response = await getDb().db().collection('mongodb1').insertOne(newCourse);
     res.status(201).json({ acknowledged: response.acknowledged, insertedId: response.insertedId });
   } catch (err) {
     res.status(500).json({ message: err.message || "Database insertion execution failure." });
@@ -57,7 +57,7 @@ const putCourse = async (req, res) => {
       startDate: req.body.startDate,
       endDate: req.body.endDate
     };
-    const response = await getDb().db().collection('courses').replaceOne({ _id: courseId }, updatedCourse);
+    const response = await getDb().db().collection('mongodb1').replaceOne({ _id: courseId }, updatedCourse);
     if (response.modifiedCount === 0) {
       return res.status(404).json({ message: "No course modified. Document un-changed or non-existent." });
     }
@@ -73,7 +73,7 @@ const deleteCourse = async (req, res) => {
       return res.status(400).json({ message: "Invalid Course ID structure format." });
     }
     const courseId = new ObjectId(req.params.id);
-    const response = await getDb().db().collection('courses').deleteOne({ _id: courseId });
+    const response = await getDb().db().collection('mongodb1').deleteOne({ _id: courseId });
     if (response.deletedCount === 0) return res.status(404).json({ message: "No document matched parameters to delete." });
     res.status(204).send();
   } catch (err) {
