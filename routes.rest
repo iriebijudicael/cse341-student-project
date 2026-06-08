@@ -76,11 +76,11 @@ POST http://localhost:3001/instructors/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "firstName": "Nathan",
-  "lastName": "Barker",
-  "email": "barkern@byui.edu",
-  "department": "Computer Science & Engineering",
-  "officeLocation": "STC 312"
+  "firstName": "Jonathan",
+  "lastName": "marquardt",
+  "email": "marquardtj@byui.edu",
+  "department": "Date: Computer Science & Engineering",
+  "officeLocation": "IT 101"
 }
 
 ### PUT Structural Key Field Overwrite Transaction Modifying Faculty Property Logs
