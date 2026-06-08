@@ -82,12 +82,15 @@ import dotenv from 'dotenv';
 import { initDb } from './models/db.js';
 import passport from 'passport';
 import session from 'express-session';
-import routesNexus from './routes/index.js';
+// import routesNexus from './routes/index.js';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import cors from 'cors';
 import * as mongodb from './models/db.js';
 import router from './routes/index.js';
+import dns from 'dns';
 
+ // Change DNS
+dns.setServers(["0.0.0.0", "1.0.0.1"]);
 dotenv.config();
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -106,21 +109,12 @@ app
   }))
   .use(passport.initialize())
   .use(passport.session())
-  .use("/", routesNexus)
-  .use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "POST, GET, PUT, PATCH, OPTIONS, DELETE"
-    );
-    next();
-  })
-  .use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }))
-  .use(cors({ origin: '*' }))
+  .use(cors({
+    origin: 'http://localhost:3001',
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'PATCH'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Z-Key', 'Authorization']
+  }))
+  .use(router);
 
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
@@ -132,13 +126,6 @@ passport.use(new GitHubStrategy({
   }
 ));
 
-// 1. Session parsing middleware configuration
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: true
-}));
-
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -147,17 +134,11 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : "Logged Out") });
-
-// 1. ADD THE LOGIN ROUTE
-app.get('/login', passport.authenticate('github', { scope: [ 'user:email' ] }));
-
-// 2. UPDATE YOUR CALLBACK ROUTE (Fixing the session: false issue)
-app.get('/github/callback', passport.authenticate('github', {
-    failureRedirect: '/api-docs', session: true }), // Changed from false to true
-    (req, res) => {
-    req.session.user = req.user;
-    res.redirect('/');
+app.get('/', (req, res) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    return res.send(`Logged in as ${req.session.user?.displayName || 'GitHub User'} <a href="/logout">Logout</a>`);
+  }
+  return res.send('<p>Logged Out</p><p><a href="/login">Login with GitHub</a></p>');
 });
 
 mongodb.initDb((err) => {

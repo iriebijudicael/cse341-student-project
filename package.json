@@ -22,6 +22,7 @@
   "dependencies": {
     "body": "^5.1.0",
     "body-parser": "^2.2.2",
+    "connect-mongo": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "ejs": "^5.0.2",
@@ -37,5 +38,6 @@
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1",
     "validatorjs": "^3.22.1"
-  }
+  },
+  "devDependencies": {}
 }

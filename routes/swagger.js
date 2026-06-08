@@ -7,8 +7,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const swaggerDocument = require('../swagger.json');
 
-// Wire up the Swagger UI dashboard routes
-router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(swaggerDocument));
+// Wire up the Swagger UI dashboard routes (serve assets and setup in one middleware)
+router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default router;
