@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 // 💡 CRITICAL: Every local relative import MUST include the explicit '.js' extension
-import * as instructorsController from '../controllers/instructors.js';
+import * as instructorsController from '../controllers/users.js';
 import * as validation from '../middleware/validate.js';
 import { isAuthenticated } from '../middleware/authenticate.js';
 
