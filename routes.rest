@@ -1,100 +1,121 @@
 ### =========================================================================
-### COLLEGE COURSE WORKSPACE MANAGER API - TESTING ENVIRONMENT TESTBED
+### LOCAL DEVELOPMENT TESTING (localhost:8080)
 ### =========================================================================
 
-@baseUrl = http://localhost:3001
-
-
-### SYSTEM SECURITY GATES & CORE ENDPOINTS
+### -------------------------------------------------------------------------
+### USERS COLLECTION - LOCAL
 ### -------------------------------------------------------------------------
 
-### GET OAuth Gateway Initializer Sequence
-GET http://localhost:3001/login HTTP/1.1
-Accept: text/html
-### GET GitHub Authentication Redirection Loop Callback Catchment
-GET http://localhost:3001/github/callback HTTP/1.1
-Accept: text/html
-### GET Application Session Termination Endpoint
-GET http://localhost:3001/logout HTTP/1.1
-Accept: text/html
-### GET Interactive REST API Specification UI Framework Dashboard
-GET http://localhost:3001/api-docs HTTP/1.1
-Accept: text/html
+### Get all users
+GET http://localhost:5500/users
 
-### COURSES MANAGEMENT RESOURCE COLLECTION
+### Get user by ID (Replace with a valid ID from your local database)
+GET http://localhost:5500/users/660a1234567890abcdef1234
+
+### Create a new user account
+POST http://localhost:5500/users
+Content-Type: application/json
+
+{
+  "firstName": "Kevine",
+  "lastName": "Kouke",
+  "email": "koukekevine@example.com",
+  "role": "customer"
+}
+
+### Update user parameters (Replace URL ID with the ID created from POST)
+PUT http://localhost:5500/users/6a281746b18d357bbd9be979
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe Janson",
+  "email": "johndoe_janson23@example.com",
+  "role": "admin"
+}
+
+### Delete a user account (Replace URL ID with a valid database ID)
+DELETE http://localhost:5500/users/660a1234567890abcdef1234
+
+
+### -------------------------------------------------------------------------
+### PRODUCTS COLLECTION - LOCAL
 ### -------------------------------------------------------------------------
 
-### GET Retrieval Query Pipeline for All Academic Course Log Indexes
-GET http://localhost:3001/courses/ HTTP/1.1
-Accept: application/json
-### GET Single Document Profile Query Look-up by Unique Hex ID String Mapping
-GET http://localhost:3001/courses/665a3dcf1c4a2b3e8c9d1001 HTTP/1.1
-Accept: application/json
-### POST Persistence Engine Payload Construction to Append a New Course Document Record
-POST http://localhost:3001/courses/ HTTP/1.1
+### Fetch complete product catalog
+GET http://localhost:5500/products
+
+### Get product specifications by ID
+GET http://localhost:5500/products/660b9876543210fedcba4321
+
+### Add a new product to the catalog
+POST http://localhost:5500/products
 Content-Type: application/json
 
 {
-  "courseTitle": "Advanced Backend Development and API Architecture",
-  "courseId": "CSE 341",
-  "instructor": "Brother Nathan Barker",
-  "classMax": 45,
-  "currentEnrollment": 38,
-  "startDate": "2026-04-20",
-  "endDate": "2026-07-22"
+  "title": "Gaming Mouse Pro",
+  "description": "High precision wireless gaming mouse with customizable DPI settings.",
+  "category": "Electronics",
+  "price": 12.08,
+  "stock": 150
 }
 
-### PUT Key Field Mutation Request Updating an Existing Data Schema Record Map
-PUT http://localhost:3001/courses/665a3dcf1c4a2b3e8c9d1001 HTTP/1.1
+### Modify product details (Replace URL ID with the ID created from POST)
+PUT http://localhost:5500/products/660b9876543210fedcba4321
 Content-Type: application/json
 
 {
-  "courseTitle": "Advanced Backend Development and API Architecture",
-  "courseId": "CSE 341",
-  "instructor": "Brother Nathan Barker",
-  "classMax": 50,
-  "currentEnrollment": 41,
-  "startDate": "2026-04-20",
-  "endDate": "2026-07-22"
+  "title": "Wireless Gaming Mouse v2",
+  "description": "Upgraded battery life ergonomic wireless mouse.",
+  "category": "Electronics",
+  "price": 64.99,
+  "stock": 95
 }
 
-### DELETE Drop Target Document Eviction Task Call
-DELETE http://localhost:3001/courses/665a3dcf1c4a2b3e8c9d1001 HTTP/1.1
-Accept:text/html
+### Remove a product item from listings
+DELETE http://localhost:5500/products/660b9876543210fedcba4321
 
-### INSTRUCTORS MANAGEMENT RESOURCE COLLECTION
+
+
+
+### =========================================================================
+### PRODUCTION DEPLOYMENT TESTING (Live on Render)
+### =========================================================================
+
+### -------------------------------------------------------------------------
+### USERS COLLECTION - PRODUCTION
 ### -------------------------------------------------------------------------
 
-### GET Retrieval Query Pipeline for All On-Campus Faculty Members
-GET http://localhost:3001/instructors/ HTTP/1.1
-Accept: application/json
-### GET Single Instructor Document Profile Look-up Querying via Unique Hex Key String
-GET http://localhost:3001/instructors/665a3edf1c4a2b3e8c9d2002 HTTP/1.1
-Accept: application/json
-### POST Persistence Engine Payload Construction to Append a New Instructor Profile Row
-POST http://localhost:3001/instructors/ HTTP/1.1
+### Get all users on live production
+GET https://cse341-code-student.onrender.com/users
+
+### Create a new user account on live production
+POST https://cse341-code-student.onrender.com/users
 Content-Type: application/json
 
 {
-  "firstName": "Jonathan",
-  "lastName": "marquardt",
-  "email": "marquardtj@byui.edu",
-  "department": "Date: Computer Science & Engineering",
-  "officeLocation": "IT 101"
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "janesmith@example.com",
+  "role": "customer"
 }
 
-### PUT Structural Key Field Overwrite Transaction Modifying Faculty Property Logs
-PUT http://localhost:3001/instructors/665a3edf1c4a2b3e8c9d2002 HTTP/1.1
+
+### -------------------------------------------------------------------------
+### PRODUCTS COLLECTION - PRODUCTION
+### -------------------------------------------------------------------------
+
+### Fetch complete product catalog on live production
+GET https://cse341-code-student.onrender.com/products
+
+### Add a new product on live production
+POST https://cse341-code-student.onrender.com/products
 Content-Type: application/json
 
 {
-  "firstName": "Nathan",
-  "lastName": "Barker",
-  "email": "barkern@byui.edu",
-  "department": "Computer Science & Engineering",
-  "officeLocation": "STC 316"
+  "title": "Mechanical Keyboard",
+  "description": "Tenkeyless mechanical keyboard with tactile brown switches.",
+  "category": "Electronics",
+  "price": 89.99,
+  "stock": 45
 }
-
-### DELETE Hard Removals Pipeline Signal Clearing Faculty Document Entries
-DELETE http://localhost:3001/instructors/665a3edf1c4a2b3e8c9d2002 HTTP/1.1
-Accept:text/html
