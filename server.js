@@ -4,8 +4,10 @@ const mongodb = require('./models/db');
 const dns = require('dns');
 
 
+ // Change DNS
+dns.setServers(["0.0.0.0", "1.0.0.1"]);
 const app = express();
-const port = process.env.PORT || 5500;
+const PORT = process.env.PORT || 5500;
 
 app
   .use(bodyParser.json())
@@ -30,6 +32,6 @@ mongodb.initDb((err) => {
     console.log(err);
   } else {
     app.listen(PORT);
-    console.log(`Connected to DB and listening on port ${PORT}`);
+    console.log(`Connected to DB and listening on port http://localhost:${PORT}`);
   }
 });

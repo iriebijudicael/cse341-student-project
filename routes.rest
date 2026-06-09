@@ -7,35 +7,35 @@
 ### -------------------------------------------------------------------------
 
 ### Get all users
-GET http://localhost:8080/users
+GET http://localhost:5500/users
 
 ### Get user by ID (Replace with a valid ID from your local database)
-GET http://localhost:8080/users/660a1234567890abcdef1234
+GET http://localhost:5500/users/660a1234567890abcdef1234
 
 ### Create a new user account
-POST http://localhost:8080/users
+POST http://localhost:5500/users
 Content-Type: application/json
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "johndoe@example.com",
+  "firstName": "Kevine",
+  "lastName": "Kouke",
+  "email": "koukekevine@example.com",
   "role": "customer"
 }
 
 ### Update user parameters (Replace URL ID with the ID created from POST)
-PUT http://localhost:8080/users/660a1234567890abcdef1234
+PUT http://localhost:5500/users/6a281746b18d357bbd9be979
 Content-Type: application/json
 
 {
   "firstName": "John",
-  "lastName": "UpdatedDoe",
-  "email": "johndoe_updated@example.com",
+  "lastName": "Doe Janson",
+  "email": "johndoe_janson23@example.com",
   "role": "admin"
 }
 
 ### Delete a user account (Replace URL ID with a valid database ID)
-DELETE http://localhost:8080/users/660a1234567890abcdef1234
+DELETE http://localhost:5500/users/660a1234567890abcdef1234
 
 
 ### -------------------------------------------------------------------------
@@ -43,25 +43,25 @@ DELETE http://localhost:8080/users/660a1234567890abcdef1234
 ### -------------------------------------------------------------------------
 
 ### Fetch complete product catalog
-GET http://localhost:8080/products
+GET http://localhost:5500/products
 
 ### Get product specifications by ID
-GET http://localhost:8080/products/660b9876543210fedcba4321
+GET http://localhost:5500/products/660b9876543210fedcba4321
 
 ### Add a new product to the catalog
-POST http://localhost:8080/products
+POST http://localhost:5500/products
 Content-Type: application/json
 
 {
-  "title": "Wireless Gaming Mouse",
-  "description": "Ergonomic 16000 DPI optical gaming mouse with RGB backlighting.",
+  "title": "Gaming Mouse Pro",
+  "description": "High precision wireless gaming mouse with customizable DPI settings.",
   "category": "Electronics",
-  "price": 59.99,
-  "stock": 120
+  "price": 12.08,
+  "stock": 150
 }
 
 ### Modify product details (Replace URL ID with the ID created from POST)
-PUT http://localhost:8080/products/660b9876543210fedcba4321
+PUT http://localhost:5500/products/660b9876543210fedcba4321
 Content-Type: application/json
 
 {
@@ -73,7 +73,7 @@ Content-Type: application/json
 }
 
 ### Remove a product item from listings
-DELETE http://localhost:8080/products/660b9876543210fedcba4321
+DELETE http://localhost:5500/products/660b9876543210fedcba4321
 
 
 
