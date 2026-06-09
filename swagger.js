@@ -9,7 +9,7 @@ const doc = {
   schemes: ['https']
 };
 
-const outputFile = './swagger-output.json';
+const outputFile = './swagger.json';
 const endpointsFiles = ['./routes/index.js'];
 
 // Generates the JSON structural blueprint file automatically

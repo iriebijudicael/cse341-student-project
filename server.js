@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongodb = require('./config/db');
+const mongodb = require('./models/db');
+const dns = require('dns');
+
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5500;
 
 app
   .use(bodyParser.json())
@@ -27,7 +29,7 @@ mongodb.initDb((err) => {
   if (err) {
     console.log(err);
   } else {
-    app.listen(port);
-    console.log(`Connected to DB and listening on port ${port}`);
+    app.listen(PORT);
+    console.log(`Connected to DB and listening on port ${PORT}`);
   }
 });

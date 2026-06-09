@@ -1,8 +1,8 @@
 {
-  "name": "cse341-student-project",
+  "name": "cse341-ecommerce-api",
   "version": "1.0.0",
-  "description": "Starter project for CSE 341",
-  "type": "module",
+  "description": "E-Commerce API first two collections development",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -35,9 +35,10 @@
     "parser": "^0.1.4",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
-    "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1",
     "validatorjs": "^3.22.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
+  }
 }
