@@ -5,8 +5,8 @@ const doc = {
     title: 'E-Commerce Core API Architecture',
     description: 'Week 05 Delivery: Managed Users and Products Collection Validation Endpoints'
   },
-  host: 'cse341-code-student.onrender.com', // REMEMBER: Swap this with your real live Render domain URL link
-  schemes: ['https']
+  host: process.env.SWAGGER_HOST || 'localhost:5500',
+  schemes: [process.env.SWAGGER_SCHEME || 'http']
 };
 
 const outputFile = './swagger.json';
