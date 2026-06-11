@@ -54,8 +54,61 @@ const saveProduct = (req, res, next) => {
   });
 };
 
+
+// -------------------------------------------------------------------------
+// CARTS COLLECTION VALIDATION RULES
+// -------------------------------------------------------------------------
+const saveCart = (req, res, next) => {
+  const validationRule = {
+    userId: 'required|string',
+    items: 'required|array',
+    'items.*.productId': 'required|string',
+    'items.*.quantity': 'required|integer|min:1'
+  };
+
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: err.errors
+      });
+    }
+    next();
+  });
+};
+
+// -------------------------------------------------------------------------
+// ORDERS COLLECTION VALIDATION RULES
+// -------------------------------------------------------------------------
+const saveOrder = (req, res, next) => {
+  const validationRule = {
+    userId: 'required|string',
+    items: 'required|array',
+    'items.*.productId': 'required|string',
+    'items.*.quantity': 'required|integer|min:1',
+    'items.*.priceAtPurchase': 'required|numeric|min:0',
+    totalAmount: 'required|numeric|min:0',
+    shippingAddress: 'required|string',
+    orderStatus: 'string|in:pending,shipped,delivered,cancelled'
+  };
+
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: err.errors
+      });
+    }
+    next();
+  });
+};
+
 module.exports = { 
   validator, 
   saveUser, 
-  saveProduct 
+  saveProduct, 
+  saveCart, 
+  saveOrder
 };

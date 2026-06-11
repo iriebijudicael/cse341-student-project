@@ -1,5 +1,5 @@
 ### =========================================================================
-### LOCAL DEVELOPMENT TESTING (localhost:8080)
+### LOCAL DEVELOPMENT TESTING (localhost:5500)
 ### =========================================================================
 
 ### -------------------------------------------------------------------------
@@ -87,10 +87,10 @@ DELETE http://localhost:5500/products/660b9876543210fedcba4321
 ### -------------------------------------------------------------------------
 
 ### Get all users on live production
-GET https://cse341-code-student.onrender.com/users
+GET https://cse341-student-project.onrender.com/users
 
 ### Create a new user account on live production
-POST https://cse341-code-student.onrender.com/users
+POST https://cse341-student-project.onrender.com/users
 Content-Type: application/json
 
 {
@@ -106,10 +106,10 @@ Content-Type: application/json
 ### -------------------------------------------------------------------------
 
 ### Fetch complete product catalog on live production
-GET https://cse341-code-student.onrender.com/products
+GET https://cse341-student-project.onrender.com/products
 
 ### Add a new product on live production
-POST https://cse341-code-student.onrender.com/products
+POST https://cse341-student-project.onrender.com/products
 Content-Type: application/json
 
 {
@@ -118,4 +118,50 @@ Content-Type: application/json
   "category": "Electronics",
   "price": 89.99,
   "stock": 45
+}
+
+### =========================================================================
+### CARTS TESTING COLLECTION (localhost:5500)
+### =========================================================================
+
+### Get all carts
+GET http://localhost:5500/carts
+
+### Create a cart (Ensure you provide strings representing valid mock IDs)
+POST http://localhost:5500/carts
+Content-Type: application/json
+
+{
+  "userId": "60a288df666826d59407b310",
+  "items": [
+    {
+      "productId": "60b9876543210fedcba43215",
+      "quantity": 2
+    }
+  ]
+}
+
+### =========================================================================
+### ORDERS TESTING COLLECTION (localhost:5500)
+### =========================================================================
+
+### Get all orders
+GET http://localhost:5500/orders
+
+### Create a tracking checkout order
+POST http://localhost:5500/orders
+Content-Type: application/json
+
+{
+  "userId": "60a288df666826d59407b310",
+  "items": [
+    {
+      "productId": "60b9876543210fedcba43215",
+      "quantity": 2,
+      "priceAtPurchase": 59.99
+    }
+  ],
+  "totalAmount": 119.98,
+  "shippingAddress": "123 Main Street, Abidjan, CI",
+  "orderStatus": "pending"
 }
