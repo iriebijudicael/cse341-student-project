@@ -5,9 +5,8 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watchAll=false",
     "swagger": "node swagger.js",
-    "prestart": "npm run swagger",
     "start": "nodemon server.js"
   },
   "repository": {
@@ -42,6 +41,8 @@
     "validatorjs": "^3.22.1"
   },
   "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2",
     "swagger-autogen": "^2.23.7"
   }
 }
