@@ -35,11 +35,11 @@ POST http://localhost:3001/courses/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "courseTitle": "Advanced Backend Development and API Architecture",
-  "courseId": "CSE 341",
-  "instructor": "Brother Nathan Barker",
-  "classMax": 45,
-  "currentEnrollment": 38,
+  "courseTitle": "Introduction to Computer Science",
+  "courseId": "cse101",
+  "instructor": "Dr. Smith",
+  "classMax": 30,
+  "currentEnrollment": 25,
   "startDate": "2026-04-20",
   "endDate": "2026-07-22"
 }
@@ -49,9 +49,9 @@ PUT http://localhost:3001/courses/665a3dcf1c4a2b3e8c9d1001 HTTP/1.1
 Content-Type: application/json
 
 {
-  "courseTitle": "Advanced Backend Development and API Architecture",
-  "courseId": "CSE 341",
-  "instructor": "Brother Nathan Barker",
+  "courseTitle": "Web Development and Database Integration",
+  "courseId": "wdd330",
+  "instructor": "Brother Jackson",
   "classMax": 50,
   "currentEnrollment": 41,
   "startDate": "2026-04-20",

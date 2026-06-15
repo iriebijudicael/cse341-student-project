@@ -35,7 +35,7 @@ const postCourse = async (req, res) => {
       startDate: req.body.startDate,
       endDate: req.body.endDate
     };
-    const response = await getDb().db().collection('courses').insertOne(course);
+    const response = await getDb().db('mongodb1').collection('courses').insertOne(course);
     res.status(201).json({ acknowledged: response.acknowledged, insertedId: response.insertedId });
   } catch (err) {
     res.status(500).json({ message: err.message || "Database insertion execution failure." });
@@ -57,7 +57,7 @@ const putCourse = async (req, res) => {
       startDate: req.body.startDate,
       endDate: req.body.endDate
     };
-    const response = await getDb().db().collection('courses').replaceOne({ _id: courseId }, course);
+    const response = await getDb().db('mongodb1').collection('courses').replaceOne({ _id: courseId }, course);
     if (response.modifiedCount === 0) {
       return res.status(404).json({ message: "No course modified. Document un-changed or non-existent." });
     }
