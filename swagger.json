@@ -1,392 +1,368 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
-    "title": "College Course Workspace Manager API",
-    "description": "CSE341 Final Project Documentation tracking Course and Instructor entities with OAuth Security Locks.",
-    "version": "1.0.0"
+    "title": "E-Commerce Core API Architecture",
+    "version": "1.0.0",
+    "description": "Week 05 Architecture Delivery: Comprehensive CRUD Operations for Users, Products, Carts, and Orders Collections with Robust Input Validation Handling."
   },
-  "host": "localhost:3001",
-  "basePath": "/",
-  "schemes": [
-    "https",
-    "http"
+  "servers": [
+    {
+      "url": "http://localhost:5500",
+      "description": "Local Development Server"
+    },
+    {
+      "url": "https://cse341-student-project.onrender.com/",
+      "description": "Live Production Server on Render"
+    }
   ],
   "paths": {
-    "/login": {
+    "/users": {
       "get": {
-        "description": "",
+        "tags": ["Users"],
+        "summary": "Fetch complete user collection accounts",
         "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/github/callback": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/logout": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/courses/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "Success - Returns array of all user objects" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "courseTitle": {
-                  "example": "any"
-                },
-                "courseId": {
-                  "example": "any"
-                },
-                "instructor": {
-                  "example": "any"
-                },
-                "classMax": {
-                  "example": "any"
-                },
-                "currentEnrollment": {
-                  "example": "any"
-                },
-                "startDate": {
-                  "example": "any"
-                },
-                "endDate": {
-                  "example": "any"
+        "tags": ["Users"],
+        "summary": "Create a new user account entry",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["firstName", "lastName", "email"],
+                "properties": {
+                  "firstName": { "type": "string", "example": "Martin" },
+                  "lastName": { "type": "string", "example": "Kouadio" },
+                  "email": { "type": "string", "example": "martin.k@example.com" },
+                  "role": { "type": "string", "enum": ["customer", "admin"], "default": "customer" }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "201": { "description": "Created - User successfully initialized" },
+          "400": { "description": "Bad Request - Intercepted by validator rules due to missing fields or bad formatting" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
-    "/courses/{id}": {
+    "/users/{id}": {
       "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "tags": ["Users"],
+        "summary": "Locate specific user profile details by database ID",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "example": "6a2882df666826d59407b315" }],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "Success - Returns single target user document" },
+          "400": { "description": "Bad Request - Invalid 24-char hex ObjectId string format" },
+          "404": { "description": "Not Found - User record matching ID does not exist" }
         }
       },
       "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "courseTitle": {
-                  "example": "any"
-                },
-                "courseId": {
-                  "example": "any"
-                },
-                "instructor": {
-                  "example": "any"
-                },
-                "classMax": {
-                  "example": "any"
-                },
-                "currentEnrollment": {
-                  "example": "any"
-                },
-                "startDate": {
-                  "example": "any"
-                },
-                "endDate": {
-                  "example": "any"
+        "tags": ["Users"],
+        "summary": "Modify user parameters",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "example": "6a2882df666826d59407b315" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["firstName", "lastName", "email"],
+                "properties": {
+                  "firstName": { "type": "string", "example": "Martin" },
+                  "lastName": { "type": "string", "example": "Kouadio" },
+                  "email": { "type": "string", "example": "martin.updated@example.com" },
+                  "role": { "type": "string", "enum": ["customer", "admin"] }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "No Content - User successfully overwritten" },
+          "400": { "description": "Bad Request - Target parameters failed validation or invalid ID" },
+          "404": { "description": "Not Found - Targeted user missing" }
         }
       },
       "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "tags": ["Users"],
+        "summary": "Permanently purge user record file",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "No Content - Document deleted successfully" },
+          "400": { "description": "Bad Request - Invalid database ID structure" },
+          "404": { "description": "Not Found - Target record path already missing" }
         }
       }
     },
-    "/instructors/": {
+    "/products": {
       "get": {
-        "description": "",
+        "tags": ["Products"],
+        "summary": "Fetch complete product catalog inventory",
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "Success - Returns collection array of items" }
         }
       },
       "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "department": {
-                  "example": "any"
-                },
-                "officeLocation": {
-                  "example": "any"
+        "tags": ["Products"],
+        "summary": "Add a new product variant into catalog",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "description", "category", "price", "stock"],
+                "properties": {
+                  "title": { "type": "string", "example": "Wireless Mechanical Gaming Keyboard" },
+                  "description": { "type": "string", "example": "Tactile brown switches with custom RGB backlighting." },
+                  "category": { "type": "string", "example": "Electronics" },
+                  "price": { "type": "number", "example": 89.99 },
+                  "stock": { "type": "integer", "example": 45 }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "201": { "description": "Created - Item appended to records" },
+          "400": { "description": "Bad Request - Numerical parameters negative or fields missing" }
         }
       }
     },
-    "/instructors/{id}": {
+    "/products/{id}": {
       "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "tags": ["Products"],
+        "summary": "Get individual product specifications",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "Success" },
+          "404": { "description": "Not Found - Item layout missing" }
         }
       },
       "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "department": {
-                  "example": "any"
-                },
-                "officeLocation": {
-                  "example": "any"
+        "tags": ["Products"],
+        "summary": "Modify product parameters",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "description", "category", "price", "stock"],
+                "properties": {
+                  "title": { "type": "string", "example": "Wireless Mechanical Keyboard v2" },
+                  "description": { "type": "string", "example": "Upgraded battery capacity model." },
+                  "category": { "type": "string", "example": "Electronics" },
+                  "price": { "type": "number", "example": 94.99 },
+                  "stock": { "type": "integer", "example": 30 }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "No Content - Successfully rewritten" },
+          "400": { "description": "Bad Request - Validation validation parameters failed" }
         }
       },
       "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "tags": ["Products"],
+        "summary": "Remove item tracking reference out of index",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "204": { "description": "No Content" }
+        }
+      }
+    },
+    "/carts": {
+      "get": {
+        "tags": ["Carts"],
+        "summary": "Retrieve all active global shopper carts",
+        "responses": {
+          "200": { "description": "Success" }
+        }
+      },
+      "post": {
+        "tags": ["Carts"],
+        "summary": "Initialize or overwrite user shopping session cart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["userId", "items"],
+                "properties": {
+                  "userId": { "type": "string", "example": "6a2882df666826d59407b315" },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["productId", "quantity"],
+                      "properties": {
+                        "productId": { "type": "string", "example": "60b9876543210fedcba43215" },
+                        "quantity": { "type": "integer", "minimum": 1, "example": 2 }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
+        },
+        "responses": {
+          "201": { "description": "Created - Cart manifest logged successfully" },
+          "400": { "description": "Bad Request - Array elements formatted incorrectly or item quantities less than 1" }
+        }
+      }
+    },
+    "/carts/{id}": {
+      "get": {
+        "tags": ["Carts"],
+        "summary": "Get specific cart file data by ID",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "Success" },
+          "444": { "description": "Not Found - Cart already empty or uninitialized" }
+        }
+      },
+      "put": {
+        "tags": ["Carts"],
+        "summary": "Modify item array payload inside active cart",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["userId", "items"],
+                "properties": {
+                  "userId": { "type": "string", "example": "6a2882df666826d59407b315" },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "productId": { "type": "string", "example": "60b9876543210fedcba43215" },
+                        "quantity": { "type": "integer", "example": 5 }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "No Content - Items mapped correctly" }
+        }
+      },
+      "delete": {
+        "tags": ["Carts"],
+        "summary": "Delete cart record reference",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "204": { "description": "No Content" }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Fetch transaction checkout history manifest log",
+        "responses": {
+          "200": { "description": "Success" }
+        }
+      },
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Create formal order ledger item sheet",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["userId", "items", "totalAmount", "shippingAddress"],
+                "properties": {
+                  "userId": { "type": "string", "example": "6a2882df666826d59407b315" },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["productId", "quantity", "priceAtPurchase"],
+                      "properties": {
+                        "productId": { "type": "string", "example": "60b9876543210fedcba43215" },
+                        "quantity": { "type": "integer", "example": 1 },
+                        "priceAtPurchase": { "type": "number", "example": 89.99 }
+                      }
+                    }
+                  },
+                  "totalAmount": { "type": "number", "example": 89.99 },
+                  "shippingAddress": { "type": "string", "example": "123 Main Street, Abidjan, CI" },
+                  "orderStatus": { "type": "string", "enum": ["pending", "shipped", "delivered", "cancelled"], "default": "pending" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created - Checkout transaction tracked" },
+          "400": { "description": "Bad Request - Validation checks rejected totals or incomplete profiles" }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get specific checkout transaction records details",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "Success" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "put": {
+        "tags": ["Orders"],
+        "summary": "Modify order tracking variables status parameters",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["userId", "items", "totalAmount", "shippingAddress", "orderStatus"],
+                "properties": {
+                  "userId": { "type": "string", "example": "6a2882df666826d59407b315" },
+                  "items": { "type": "array", "items": { "type": "object" } },
+                  "totalAmount": { "type": "number", "example": 89.99 },
+                  "shippingAddress": { "type": "string", "example": "123 Main Street, Abidjan, CI" },
+                  "orderStatus": { "type": "string", "enum": ["pending", "shipped", "delivered", "cancelled"], "example": "shipped" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "No Content - Parameters updated" }
+        }
+      },
+      "delete": {
+        "tags": ["Orders"],
+        "summary": "Remove order receipt entry out of records",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "204": { "description": "No Content" }
         }
       }
     }
