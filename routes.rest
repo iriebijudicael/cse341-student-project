@@ -17,9 +17,9 @@ POST http://localhost:5500/users
 Content-Type: application/json
 
 {
-  "firstName": "Kevine",
-  "lastName": "Kouke",
-  "email": "koukekevine@example.com",
+  "firstName": "Aho",
+  "lastName": "Emmanuella",
+  "email": "emmanuella@example.com",
   "role": "customer"
 }
 
